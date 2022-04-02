@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { addTodo } from '../redux/todoSlice';
 
 const Title = styled.h1`
   text-align: center;
@@ -8,8 +10,8 @@ const Title = styled.h1`
 const Form = styled.form``;
 
 const InformationInput = styled.input`
-    display: block;
-    margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 `;
 
 const SubmitButton = styled.button`
@@ -21,8 +23,15 @@ const SubmitButton = styled.button`
 const AddTodo = () => {
   const [value, setValue] = useState('');
 
+  const dispatch = useDispatch();
+
   const SubmitForm = (e) => {
     e.preventDefault();
+    dispatch(
+      addTodo({
+        text: value,
+      })
+    );
     setValue('');
   };
 
